@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST", action="">
+  {{ form.hidden_tag() }}
+  <div>
+    {% if form.username.errors %}
+    {{ form.username(class="form-control form-control-lg is-invalid") }}
+    <div class="invalid-feedback">
+      {% for errors in form.username.errors %}
+          <span> {{ error }}</span>
+      {% endfor %}
+    </div>
+    {% else %}
+    Username: {{ form.username }}
+    {% endif %}
+  </div>
+    <div>
+    {% if form.email.errors %}
+      {{ form.email(class="form-control form-control-lg is-invalid") }}
+    <div class="invalid-feedback">
+      {% for errors in form.email.errors %}
+          <span> {{ error }}</span>
+      {% endfor %}
+    </div>
+    {% else %}
+    Email: {{ form.email }}
+    {% endif %}
+  </div>
+    <div>
+    {% if form.password.errors %}
+      {{ form.password(class="form-control form-control-lg is-invalid") }}
+    <div class="invalid-feedback">
+      {% for errors in form.password.errors %}
+          <span> {{ error }}</span>
+      {% endfor %}
+    </div>
+      {% else %}
+    Password: {{ form.password }}
+    {% endif %}
+  </div>
+    <div>
+    {% if form.confirm_password.errors %}
+      {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+    <div class="invalid-feedback">
+      {% for errors in form.confirm_password.errors %}
+          <span> {{ error }}</span>
+      {% endfor %}
+    </div>
+    {% else %}
+    Confirm Password: {{ form.confirm_password }}
+    {% endif %}
+  </div>
+<!--  Email: {{ form.email }}-->
+<!--  Username: {{ form.username }}-->
+<!--  Password: {{ form.password }}-->
+<!--  Confirm Password: {{ form.confirm_password }}-->
+  <div>
+    {{ form.submit(class="btn btn-outline-info") }}
+  </div>
+</form>
+
+{% endblock %}

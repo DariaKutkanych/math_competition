@@ -6,12 +6,8 @@
       Tasks list:
     </div>
     <ol class="list-group list-group-flush">
-      {% for task in tasks%}
-      {% if task.id in list %}
-        <li class="list-group-item"><a>{{ task.id }}: {{ task.name }}</a></li>
-      {% else %}
-        <li class="list-group-item"><a href="{{ url_for('task', task_id=task.id) }}">{{ task.id }}: {{ task.name }}</a></li>
-      {% endif %}
+      {% for user in sorted_rating %}
+        <li class="list-group-item"><a href="#">{{ user[0] }}: {{ user[1] }}</a></li>
       {% endfor %}
       <li class="list-group-item">Twitter: @bestblogger</li>
       <li class="list-group-item">Facebook: @bestblogger</li>

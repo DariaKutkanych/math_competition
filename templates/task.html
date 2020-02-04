@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<form method="POST", action="">
+  {{ calculation.hidden_tag() }}
   <h3>Countries I have been to:</h3>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">{{ task}}</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h5 class="card-title">{{ task.name }}</h5>
+    <p class="card-text">{{ task.text }}</p>
+
+  </div>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text"></span>
+  </div>
+  Result: {{ calculation.result }}
+</div>
+  <div>
+    {{ calculation.submit(class="btn btn-outline-info") }}
   </div>
 </div>
+</form>
 {% endblock %}

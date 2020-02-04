@@ -1,5 +1,6 @@
 from settings import db, login_manager
 from flask_login import UserMixin
+from datetime import datetime
 
 
 @login_manager.user_loader
@@ -17,6 +18,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     time = db.Column(db.Integer, nullable=True, default=0)
+    last_start = db.Column(db.DateTime, nullable=False,
+        default=datetime.utcnow)
     tasks = db.relationship("Task", secondary=task_user, backref=db.backref("users"), lazy="dynamic")
 
     def serialize(self):

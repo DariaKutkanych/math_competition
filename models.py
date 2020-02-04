@@ -40,7 +40,6 @@ class Task(db.Model):
             "id": self.id,
             "name": self.name,
             "text": self.text,
-            "time": self.time,
             "result": self.result
         }
 

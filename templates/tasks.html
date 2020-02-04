@@ -3,12 +3,15 @@
 {% block content %}
   <div class="card" style="width: 18rem;">
     <div class="card-header">
-      Find me at:
+      Tasks list:
     </div>
-    <ul class="list-group list-group-flush">
+    <ol class="list-group list-group-flush">
+      {% for task in tasks%}
+        <li class="list-group-item"><a href="#">{{ task.id }}: {{ task.name }}</a></li>
+      {% endfor %}
       <li class="list-group-item">Twitter: @bestblogger</li>
       <li class="list-group-item">Facebook: @bestblogger</li>
       <li class="list-group-item">Instagram: @bestblogger</li>
-    </ul>
+    </ol>
   </div>
 {% endblock %}

@@ -1,12 +1,11 @@
 from flask import request, render_template, flash, redirect, url_for
-from models import User
+from models import User, Task, task_user
 from settings import app, db, bcrypt
 from forms import RegistrationForm, LoginForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/home")
 def home():
-    print([user.serialize() for user in User.query.all()])
     return render_template("home.html", title="Home")
 
 
@@ -51,6 +50,19 @@ def logout():
 @login_required
 def account():
     return render_template("account.html", title="Account")
+
+
+@app.route("/tasks")
+def tasks():
+    tasks = [task.serialize() for task in Task.query.all()]
+    print(tasks)
+    return render_template("tasks.html", title="Tasks", tasks=tasks)
+
+@app.route("/tasks/<int: task_id>_")
+def task(task_id):
+    task = Task.query.get(task_id)
+    return render_template("task.html", title="Task", task=task)
+
 
 if __name__=="__main__":
     app.run(debug=True)

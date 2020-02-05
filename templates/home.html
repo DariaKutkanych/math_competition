@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Welcome to my blog</h1>
-<p> I am currently at {{ country }}</p>
+<h1>Welcome to Math Competition</h1>
+{% for event in news %}
+<div class="card" style="width: 50rem;">
+  <div class="card-body">
+    <h5 class="card-title">Today {{ day }}</h5>
+    <p class="card-text">{{ event }}</p>
+  </div>
+</div>
+{% endfor %}
 {% endblock %}

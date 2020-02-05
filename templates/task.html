@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form method="POST", action="">
+<form method="POST", action="/tasks/{{ task.id }}">
   {{ calculation.hidden_tag() }}
   <h3>Countries I have been to:</h3>
 <div class="card" style="width: 18rem;">

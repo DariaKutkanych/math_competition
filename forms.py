@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, BooleanField,\
+    IntegerField
+from wtforms.validators import DataRequired, Length, Email, EqualTo,\
+    ValidationError
 from models import User
 
 
@@ -24,12 +26,14 @@ class RegistrationForm(FlaskForm):
         if email:
             raise ValidationError("That email is taken! Choose another")
 
+
 class LoginForm(FlaskForm):
     email = StringField("Email",
                         validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired()])
     remember = BooleanField("Remember Me")
     submit = SubmitField("Login")
+
 
 class CalculationForm(FlaskForm):
     result = IntegerField("Result", validators=[DataRequired()])

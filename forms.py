@@ -37,4 +37,4 @@ class LoginForm(FlaskForm):
 
 class CalculationForm(FlaskForm):
     result = IntegerField("Result", validators=[DataRequired()])
-    submit = SubmitField("Submit")
+    submit = SubmitField("Next")

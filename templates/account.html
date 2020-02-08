@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1> {{ current_user.username }}</h1>
-<h2> {{ average_time }}</h2>
+
+<div class="account-page">
+  <h2 style="text-align:center">User Profile Card</h2>
+
+  <div class="card">
+    <img src="./static/img/default-user.jpg" alt="default user" width="200">
+    <h1>{{ current_user.username }}</h1>
+    <p class="title">CEO & Founder, Example</p>
+    <p>Harvard University</p>
+    <h2> {{ average_time }}</h2>
+  </div>
+</div>
+
 {% endblock %}

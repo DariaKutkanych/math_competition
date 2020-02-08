@@ -1,63 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form method="POST", action="">
+<form method="POST" action="">
   {{ form.hidden_tag() }}
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="user_name" type="text" class="validate" name="username">
+        <label for="user_name">User Name</label>
+      </div>
+    </div>
+  <div class="row">
+    <div class="col s12">
+      <div class="input-field">
+        <input id="email_inline" type="email" class="validate" name="email">
+        <label for="email_inline">Email</label>
+        <span class="helper-text" data-error="wrong" data-success="right"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="input-field col s6">
+          <input id="password" type="password" class="validate" name="password">
+          <label for="password">Password</label>
+          <span class="helper-text" data-error="wrong" data-success="right"></span>
+      </div>
+      <div class="input-field col s6">
+          <input id="passwordConfirm" type="password" name="confirm_password">
+          <label id="lblPasswordConfirm" for="passwordConfirm" data-error="Password not match" data-success="Password Match">Password (Confirm)</label>
+          <span class="helper-text" data-error="wrong" data-success="right"></span>
+      </div>
+  </div>
   <div>
-    {% if form.username.errors %}
-    {{ form.username(class="form-control form-control-lg is-invalid") }}
-    <div class="invalid-feedback">
-      {% for errors in form.username.errors %}
-          <span> {{ error }}</span>
-      {% endfor %}
-    </div>
-    {% else %}
-    Username: {{ form.username }}
-    {% endif %}
-  </div>
-    <div>
-    {% if form.email.errors %}
-      {{ form.email(class="form-control form-control-lg is-invalid") }}
-    <div class="invalid-feedback">
-      {% for errors in form.email.errors %}
-          <span> {{ error }}</span>
-      {% endfor %}
-    </div>
-    {% else %}
-    Email: {{ form.email }}
-    {% endif %}
-  </div>
-    <div>
-    {% if form.password.errors %}
-      {{ form.password(class="form-control form-control-lg is-invalid") }}
-    <div class="invalid-feedback">
-      {% for errors in form.password.errors %}
-          <span> {{ error }}</span>
-      {% endfor %}
-    </div>
-      {% else %}
-    Password: {{ form.password }}
-    {% endif %}
-  </div>
-    <div>
-    {% if form.confirm_password.errors %}
-      {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
-    <div class="invalid-feedback">
-      {% for errors in form.confirm_password.errors %}
-          <span> {{ error }}</span>
-      {% endfor %}
-    </div>
-    {% else %}
-    Confirm Password: {{ form.confirm_password }}
-    {% endif %}
-  </div>
-<!--  Email: {{ form.email }}-->
-<!--  Username: {{ form.username }}-->
-<!--  Password: {{ form.password }}-->
-<!--  Confirm Password: {{ form.confirm_password }}-->
-  <div>
-    {{ form.submit(class="btn btn-outline-info") }}
+    {{ form.submit(class="btn submit-button") }}
   </div>
 </form>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
 
 {% endblock %}

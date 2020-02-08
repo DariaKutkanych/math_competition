@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Welcome to Math Competition</h1>
-{% for event in news %}
-<div class="card" style="width: 50rem;">
-  <div class="card-body">
-    <h5 class="card-title">Today {{ day }}</h5>
-    <p class="card-text">{{ event }}</p>
-  </div>
+<h1 class="title">Welcome to Math Competition</h1>
+<div class="cards-wrapper">
+  {% for event in news %}
+    <div class="card">
+      <div class="card-image">
+        <img src="https://www.sciencefriday.com/wp-content/uploads/2016/08/Artboard-1.png">
+      </div>
+      <div class="card-content">
+        <h2>Today {{ day }}</h2>
+        <p>{{ event }}</p>
+      </div>
+    </div>
+  {% endfor %}
 </div>
-{% endfor %}
 {% endblock %}

@@ -79,7 +79,6 @@ def rating():
     return render_template("rating.html", title="Rating",
                            sorted_rating=sorted_rating)
 
-
 @app.route("/tasks")
 def tasks():
     user = User.query.filter_by(id=current_user.id).first()
@@ -108,8 +107,9 @@ def task(task_id):
                 dict(time=seconds))
             db.session.commit()
             return redirect(url_for("home"))
-        else:
-            return redirect(url_for("tasks"))
+        # else:
+        #     return redirect(url_for("tasks"))
+
     db.session.query(User).filter_by(id=current_user.id).update(
         dict(last_start=datetime.now()))
     db.session.commit()

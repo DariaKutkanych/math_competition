@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="card" style="width: 18rem;">
-    <div class="card-header">
-      Top 30 rating list:
-    </div>
-    <ol class="list-group list-group-flush">
+  <div class="account-page">
+    <h3>Top 30 rating list:</h3>
+    <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>User</th>
+        <th>Speed</th>
+        <th>Tasks</th>
+      </tr>
+    </thead>
+    <tbody>
       {% for user in sorted_rating %}
-        <li class="list-group-item"><a href="#">{{ user[0] }}: {{ user[1] }}</a></li>
+        <tr>
+          <td>{{ user[0] + 1 }}</td>
+          <td><strong>{{ user[1][0] }}</strong></td>
+          <td>{{ user[1][1] }}</td>
+          <td>{{ user[1][2] }}</td>
+        </tr>
       {% endfor %}
-      <li class="list-group-item">Twitter: @bestblogger</li>
-      <li class="list-group-item">Facebook: @bestblogger</li>
-      <li class="list-group-item">Instagram: @bestblogger</li>
-    </ol>
-  </div>
+    </tbody>
+  </table>
+</div>
 {% endblock %}

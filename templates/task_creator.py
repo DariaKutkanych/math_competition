@@ -1,0 +1,32 @@
+from settings import db
+from models import Task
+
+# id = db.Column(db.Integer, primary_key=True)
+#     type = db.Column(db.String(100), unique=False, nullable=False)
+#     name = db.Column(db.String(100), unique=True, nullable=False)
+#     text = db.Column(db.String(1000), unique=True, nullable=False)
+#     result = db.Column(db.String(100), unique=False, nullable=False)
+
+task = Task(type="Test 1", name="task 1", text="../static/tasks_img/1.jpg", result="C")
+task2 = Task(type="Test 1", name="task 2", text="../static/tasks_img/2.jpg", result="D")
+task3 = Task(type="Test 1", name="task 3", text="../static/tasks_img/3.jpg", result="E")
+task4 = Task(type="Test 1", name="task 4", text="../static/tasks_img/4.jpg", result="B")
+task5 = Task(type="Test 1", name="task 5", text="../static/tasks_img/5.jpg", result="D")
+task6 = Task(type="Test 1", name="task 6", text="../static/tasks_img/6.jpg", result="C")
+task7 = Task(type="Test 1", name="task 7", text="../static/tasks_img/7.jpg", result="E")
+task8 = Task(type="Test 1", name="task 8", text="../static/tasks_img/8.jpg", result="E")
+task9 = Task(type="Test 1", name="task 9", text="../static/tasks_img/9.jpg", result="D")
+task10 = Task(type="Test 1", name="task 10", text="../static/tasks_img/10.jpg", result="B")
+task11 = Task(type="Test 2", name="task 11", text="../static/tasks_img/11.jpg", result="A")
+task12 = Task(type="Test 2", name="task 12", text="../static/tasks_img/12.jpg", result="B")
+task13 = Task(type="Test 2", name="task 13", text="../static/tasks_img/13.jpg", result="E")
+task14 = Task(type="Test 2", name="task 14", text="../static/tasks_img/14.jpg", result="E")
+task15 = Task(type="Test 2", name="task 15", text="../static/tasks_img/15.jpg", result="C")
+task16 = Task(type="Test 2", name="task 16", text="../static/tasks_img/16.jpg", result="D")
+task17 = Task(type="Test 2", name="task 17", text="../static/tasks_img/17.jpg", result="D")
+task18 = Task(type="Test 2", name="task 18", text="../static/tasks_img/18.jpg", result="B")
+task19 = Task(type="Test 2", name="task 19", text="../static/tasks_img/19.jpg", result="C")
+task20 = Task(type="Test 2", name="task 20", text="../static/tasks_img/20.jpg", result="D")
+
+db.session.query(Task).filter_by(id=20).update(dict(text="../static/tasks_img/20.jpg"))
+db.session.commit()

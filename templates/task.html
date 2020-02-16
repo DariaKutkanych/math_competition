@@ -3,22 +3,28 @@
 {% block content %}
 <form method="POST", action="/tasks/{{ task.id }}">
   {{ calculation.hidden_tag() }}
-  <h3>Countries I have been to:</h3>
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">{{ task.name }}</h5>
-    <p class="card-text">{{ task.text }}</p>
 
+  <h5 class="card-title">{{ task.name }}</h5>
+  <div class="task-wrapper">
+    <img src="{{ task.text }}" class="task__image" alt="" />
+    <div class="task__answer">
+      <span class="task__answer-title">Your answer: </span>
+      <span class="task__answer-field">{{ calculation.result }}</span>
+    </div>
   </div>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text"></span>
+  {% if task.id % 10 == 0 %}
+     {{ calculation.submit(class="btn btn-outline-info") }}
+      <div id="popup1" class="overlay {% if open_popup %}show{% endif %}">
+        <div class="popup">
+          <h3>Congratulations!</h3>
+          <p>You have finished a test!</p>
+          <a class="close" href="/account">&times;</a>
+        </div>
+      </div>
+  {% else %}
+    {{ calculation.next(class="btn btn-outline-info") }}
+  {% endif %}
   </div>
-  Result: {{ calculation.result }}
-</div>
-  <div>
-    {{ calculation.submit(class="btn btn-outline-info") }}
-  </div>
-</div>
 </form>
+
 {% endblock %}

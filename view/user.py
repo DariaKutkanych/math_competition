@@ -62,20 +62,29 @@ def logout():
 @login_required
 def account():
     user = User.query.filter_by(id=current_user.id).first()
+    print(user.tasks.count())
     if user.tasks.count() > 0:
         average_time = user.time / user.tasks.count()
     else:
         average_time = 0
     return render_template("account.html", title="Account",
-                           average_time=average_time)
+                           average_time=average_time, tasks=user.tasks.count())
 
 
 @app.route("/rating")
 def rating():
     users = User.query.all()
-    rating = {user.username: user.time / user.tasks.count() for user in users
-              if user.tasks.count() > 0}
-    sorted_rating = sorted(rating.items(), key=lambda x: x[1])[:30]
+    rating = [(user.username, user.time / user.tasks.count(), user.tasks.count()) for user in users
+              if user.tasks.count() > 0]
+    sorted_one = sorted(rating, key=lambda x: x[1])[:30]
+    sorted_rate = sorted(sorted_one, key=lambda x: x[2])[:30]
+    sorted_rating = []
+    for item in enumerate(sorted_rate):
+        sorted_rating.append(item)
+    print(sorted_rating)
+
+
+
     return render_template("rating.html", title="Rating",
                            sorted_rating=sorted_rating)
 
@@ -120,7 +129,6 @@ def task(task_id):
             open_popup = True
         else:
             return redirect(task_id + 1)
-
 
     db.session.query(User).filter_by(id=current_user.id).update(
         dict(last_start=datetime.now()))

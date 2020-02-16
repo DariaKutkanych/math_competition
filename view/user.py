@@ -77,7 +77,7 @@ def rating():
     rating = [(user.username, user.time / user.tasks.count(), user.tasks.count()) for user in users
               if user.tasks.count() > 0]
     sorted_one = sorted(rating, key=lambda x: x[1])[:30]
-    sorted_rate = sorted(sorted_one, key=lambda x: x[2])[:30]
+    sorted_rate = sorted(sorted_one, key=lambda x: x[2], reverse=True)[:30]
     sorted_rating = []
     for item in enumerate(sorted_rate):
         sorted_rating.append(item)

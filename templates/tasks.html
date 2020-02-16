@@ -4,14 +4,14 @@
   <div class="tasks-container">
     <h4 class="tasks-container__header">Tasks list:</h4>
     <ol class="tasks-container__list">
-      {% for task in tasks%}
-      {% if task.id in list %}
+      {% for task in first_id%}
+      {% if task.type in list %}
       <li class="tasks-container__list-item card">
-        <a class="tasks-container__list-link tasks-container__list-link_visited">{{ task.id }}. {{ task.name }}</a>
+        <a class="tasks-container__list-link tasks-container__list-link_visited">{{ task.type }}</a>
       </li>
       {% else %}
       <li class="tasks-container__list-item card">
-        <a class="tasks-container__list-link" href="{{ url_for('task', task_id=task.id) }}">{{ task.id }}. {{ task.name }}</a>
+        <a class="tasks-container__list-link" href="{{ url_for('task', task_id=task.id) }}">{{ task.type }}</a>
       </li>
       {% endif %}
       {% endfor %}

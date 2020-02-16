@@ -1,24 +1,19 @@
-var modal = document.getElementById("myModal");
+$("#password").on("focusout", function (e) {
+    if ($(this).val() != $("#passwordConfirm").val()) {
+        $("#passwordConfirm").removeClass("valid").addClass("invalid");
+        $('.submit-button').prop('disabled', true);
+    } else {
+        $("#passwordConfirm").removeClass("invalid").addClass("valid");
+        $('.submit-button').prop('disabled', false);
+    }
+});
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+$("#passwordConfirm").on("keyup", function (e) {
+    if ($("#password").val() != $(this).val()) {
+        $(this).removeClass("valid").addClass("invalid");
+        $('.submit-button').prop('disabled', true);
+    } else {
+        $(this).removeClass("invalid").addClass("valid");
+        $('.submit-button').prop('disabled', false);
+    }
+});

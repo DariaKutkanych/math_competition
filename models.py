@@ -34,13 +34,15 @@ class User(db.Model, UserMixin):
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(100), unique=False, nullable=False)
     name = db.Column(db.String(100), unique=True, nullable=False)
     text = db.Column(db.String(1000), unique=True, nullable=False)
-    result = db.Column(db.Integer, nullable=True)
+    result = db.Column(db.String(100), unique=False, nullable=False)
 
     def serialize(self):
         return {
             "id": self.id,
+            "type": self.type,
             "name": self.name,
             "text": self.text,
             "result": self.result

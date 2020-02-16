@@ -79,42 +79,54 @@ def rating():
     return render_template("rating.html", title="Rating",
                            sorted_rating=sorted_rating)
 
+
 @app.route("/tasks")
 def tasks():
     user = User.query.filter_by(id=current_user.id).first()
-    current_task_list = [task.id for task in user.tasks]
-    tasks = [task.serialize() for task in Task.query.all()]
+    current_task_list = set([task.type for task in user.tasks])
+    tasks = sorted(list(set([task.serialize()["type"] for task in Task.query.all()])))
+    first_id_list = []
+    print(tasks)
+    for type in tasks:
+        first = Task.query.filter_by(type=type).first()
+        first_id_list.append(first)
     return render_template("tasks.html", title="Tasks", tasks=tasks,
-                           list=current_task_list)
+                           list=current_task_list, first_id=first_id_list)
 
 
 @app.route("/tasks/<int:task_id>", methods=["GET", "POST", "PATCH"])
 def task(task_id):
+    open_popup = False
     task = Task.query.get(task_id).serialize()
     calculation = CalculationForm()
     user = User.query.filter_by(id=current_user.id).first()
     t = Task.query.filter_by(id=task_id).first()
     if calculation.validate_on_submit():
-        user.tasks.append(t)
-        db.session.add(user)
-        db.session.commit()
-        if task["result"] == calculation.result.data:
-            finish = datetime.now()
-            timedelta = finish - user.last_start
-            seconds = timedelta.days * 24 * 3600 + timedelta.seconds + \
-                      user.time
-            db.session.query(User).filter_by(id=current_user.id).update(
-                dict(time=seconds))
+        if task["result"] == calculation.result.data.upper():
+
+            user.tasks.append(t)
+            db.session.add(user)
             db.session.commit()
-            return redirect(url_for("home"))
-        # else:
-        #     return redirect(url_for("tasks"))
+
+        finish = datetime.now()
+        timedelta = finish - user.last_start
+        seconds = timedelta.days * 24 * 3600 + timedelta.seconds + \
+                  user.time
+        db.session.query(User).filter_by(id=current_user.id).update(
+            dict(time=seconds))
+        db.session.commit()
+
+        if task_id % 10 == 0:
+            open_popup = True
+        else:
+            return redirect(task_id + 1)
+
 
     db.session.query(User).filter_by(id=current_user.id).update(
         dict(last_start=datetime.now()))
     db.session.commit()
     return render_template("task.html", title="Task", task=task,
-                           calculation=calculation)
+                           calculation=calculation, open_popup=open_popup)
 
 
 if __name__ == "__main__":
